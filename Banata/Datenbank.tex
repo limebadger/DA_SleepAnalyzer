@@ -1,0 +1,117 @@
+\fancyfoot[RE,LO]{Autor: Fatiha Banata}
+
+\section {Datenbank} \label {datenbank}
+
+\subsection {Einleitung} \label { einleitung}
+
+Der Sleep-Analyzer ist ein kompaktes Schlaflabor, das verschiedene Biosignale während des Schlafs misst und aufzeichnet. Die im Schlaf erfassten Messdaten werden in einer Datenbank gespeichert. Die vorliegenden Kapitel befassen sich zun\"achst mit der grundlegenenen Theorie eines Datenbankmanagementsystem. Anschließend werden die realisierten Schritte, die bei dem Entwurf der SleepAnalzer-Datenbank essentiell waren, erl\"autert. Des Weiteren widmet sich das Kapitel der Sicherheit von Daten. Abschließend wird die Konfiguration eines Servers veranschaulicht.
+
+
+\subsection {Datenbankmanagementsystem} \label {datenbankmanagementsystem} 
+
+Schnittstelle zwischen Datenbank und Anwender  
+
+\subsection {MariadB} \label {mariadb}
+
+Warum Mariadb? Unterschied zu anderen DBMS (MYSQL)
+
+\subsection {Normalformen} \label {normalformen}
+
+Was sind Normalformen, Funktionen 
+
+\subsubsection {Erste Normalform} \label {erste normalform}
+
+Alle Attributwerte m\"ussen atomar sein
+
+\subsubsection {Zweite Normalform} \label {zweite normalform}
+
+Alle Nichtschlu\"usselattribut voll funktional abh\"angig vom gesamten Prim\"arschl\"ussel
+
+\subsubsection {Dritte Normalform} \label {dritte normalform}
+
+Alle Nichtschl\"usselattribute sind voneinander unabh\"angig
+
+
+\subsection {Entwicklung des Datenbanksytems} \label {entwicklung des datenbanksytem}
+
+Zum Entwurf eines Datenbanksytem z\"ahlt die sowohl Anforderungsdefintion der Datenbank als auch die Defintion der Datentypen. Weiters wird mithilfe eines Entity-Realshionship-Modells (ER-Modell) eine Grunsdtruktur der Datenbak definiert. Hier werden die Entit\"aten und Beziehungen der einzelnen Tabellen konkretisiert.
+
+
+\subsubsection {Anforderungsdefinition} \label {anforderungsdefinition}
+
+Problembeschreibung, Anforderungen
+
+\subsubsection {Entity-Relationsip-Modell} \label {entity-relationsip-modell}
+
+\begin{itemize}
+	\item Version 1 des ER-Diagramm (Bild einf\"ugen)
+\end{itemize}
+\begin{itemize}
+	\item Version 2 des ER-Diagramm (Bild einf\"ugen)
+\end{itemize}
+Im Vergleich zum ersten Entwurf des ER-Diagramm wurde die Startzeit und Endzeit aus der session-tabelle entfernt, da es sonst zu redundante Daten f\"uhren. Man k\"onnte die Werte \"uberschreiben. Daher hat jeder user eine zugeh\"orige (session id),in der die Werte des EOG, die w\"ahrend der Nacht aufgezeichnet, werden hineingeschrieben werden. Des Weiteren wurden die vertikalen sowie die horizontalen Werte des Elektrokardiogramms einem anderen Datentyp zugeordnet. Statt dem Datentyp INT (integer) haben wir den Datentyp SMALLINT ausgesucht. Diese Ver\"anderung wurde durchfe\"uhrt, da wir h\"ochstens 14 Bit erhalten, wobei dieser Wert nicht überschritten werden kann. Da INT eine Gr\"o{\ss}e von 4 Byte (32 Bit) hat und SMALLINT eine Gr\"o{\ss}e von 2 Byte (16 Bit), ist SMALLINT vollkommen ausreichend, daher wurde dieser Entschluss gefasst. Jedoch muss man anmerken, dass man bei einem kleinem Speicherplatz mit Verlangsamung rechnen sollte. Diese Problematik wird durch die Nutzung einer Speicherkarte umgangen.   
+
+
+
+\paragraph {Entit\"at (entity)} \label {entit\"at}
+
+Entit\"at: user, biosignal,session
+
+\paragraph {Beziehungen (realationship)} \label {beziehungen}
+
+Einseitige eindeutige Beziehung (1:M)
+
+
+\paragraph {Prim\"arschl\"ussel} \label{prim\"arschl\"ussel}
+
+eindeutige Identifizierung 
+
+\paragraph {Fremdschl\"ussel} \label{fremdschl\"ussel}
+
+Anwendung von Frendschl\"ussel
+
+\subsection {Anfragesprache SQL} \label {anfragesprache sql}
+
+Die wichtigsten Datendefitionsteil (create,drop,alter)
+CODE
+
+\subsubsection { Wertebereich} \label { Wertebereich}
+
+
+Auswahl von Datentyp (SMALLINT, TIMESTAMP...)
+
+
+\subsubsection {Aktualisierende Operationen} \label {Aktualisierende Operationen}
+
+INSERT von Zeilen, Relation UPDATE, DELETE
+
+
+\subsection {Sicherheit} \label {sicherheit}
+
+Wenn es um Datenbanken geht, liegt Datensicherheit an erster Stelle. Vorallem bei sensiblen Daten wie bespielsweise Passw\"orter. Daher muss eine Sichheitsmaßnahem implemntiert werden, um die Sicherheit der User zu gew\"ahrleisten. Da sich jeder User mithilfe eines Passwortes und eines Usernames Zugriff auf seine Schlafmessungen verschafft, ist eine Verschl\"usselung unerl\"asslich. Es wurden zwei Methoden der Verschlüsslung in Betracht gezogen, wobei sich dann letzendlich für eine Methode entschieden wurde. 
+
+\subsubsection {Datenverschl\"usselung} \label {datenverschl\"usselung}
+
+Verschl\"usselung/Passwort
+
+\paragraph {Hashing} \label {hashing}
+
+Hash-Funktionen
+
+\paragraph {Encryption} \label {Encryption}
+
+Verschl\"usselung
+Unterschied der beiden Verschlusselungsarten 
+
+\subsection {Server} \label {server}
+
+Konfigurations des Servers
+
+\subsubsection {Einrichtung des Servers} \label {einrichtung des servers}
+
+Einrichtung des Servers
+
+\subsubsection {Zugriff und Funktion} \label {zugriff und funktion}
+
+Zugriff/Funktion
+dynamische Ip-Adressen

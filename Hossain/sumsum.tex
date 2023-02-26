@@ -1,0 +1,25 @@
+\fancyfoot[RE,LO]{Autor: Sumaiya Hossain}
+
+\section {Platine} \label {}
+
+\subsection {RTC-Modul} \label {}
+
+In diesem Kapitel wird das RTC Modul präsentiert, welches für das Projekt unverzichtbar ist. 
+
+\subsubsection {Hintergrund} \label {}
+
+Da der Benutzer eine bestimmte Uhrzeit einstellen kann für den Wecker, müssen mit den Messungen auch die Uhrzeit mitgegeben werden. Damit das möglich ist wurde ein RTC-Modul gefertigt. 
+
+\subsubsection {Bestandteile} \label {}
+
+Die Schaltung des Real-Time-Clocks besteht aus einem Quarz, einer Knopfzellenbatterie und dem DS1302SN+. Das DS1302SN+ ist ein Trickle-Charge Timekeeping Chip, die auch ein Echtzeituhr und -kalender beinhaltet und sie sorgt dafür, dass die App beim Auswerten der Messungen die genau Zeit kennt. Der Unterschied zum gewählten Chip und zum DS1302 ist, dass der gewählte eine andere Pin Package hat und die Temperatur Range geht von -40°C bis 85°C. Die Batterie dient dazu die Echtzeituhr am laufenden zu halten, wenn das RTC nicht versorgt wird.  
+
+\subsubsection {Funktion} \label {}
+
+Durch den Quarz wird eine Taktfrequenz erzeugt, welches ermöglicht, dass den Sekundentakt einer Uhr zu generieren.
+
+\subsubsection {EOG-Platine} \label {}
+
+Ein wichtiger Bestandteil dieses Projekts ist das EOG (siehe Kapitel Claudia), für die eine Platine angefertigt wurde. 
+Die meisten SMD Bauteile waren verfügbar sowohl in der Schule als auch in den Geschäften. Ein Problem gab es bei den 3M Ohm SMD Widerstände, die dann mit drei seriell geschalteten 1M Ohm SMD Widerständen ersetzt wurden. 
+Die Platine wurde auf KiCad Version 6.0, ein Schaltplaneditor und Layoutprogram, angefertigt. Zuerst wurde eine Schematic erstellt, in der alle Bauteile verbunden wurden. Danach folgte die Footprint-Zuweisung der Bauteile. Ein Problem gab es bei dem ESP, denn eine passende Footprint war nicht vorhanden und musste daher erstellt werden. Anschließend konnte dann nach der Erstellung der PCB die eigentlichen Leiterbahnen für die Platinen nachgezogen werden. 

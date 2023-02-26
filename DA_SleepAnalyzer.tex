@@ -1,0 +1,117 @@
+\documentclass[titlepage,12pt,twoside]{article}
+
+%\pagestyle{headings} 
+\pagenumbering{arabic}
+\textheight240mm            \textwidth150mm  \parskip0pt plus3pt
+\marginparwidth22mm  \marginparsep3mm
+\oddsidemargin4.6mm   \evensidemargin4.6mm  \topmargin-20mm
+\setcounter{secnumdepth}{5}  % = Nummerierung vertiefen *
+\setcounter{tocdepth}{4}		 % = Aufnahme von paragraph und subparagraph in das Inhaltsverzeichnis *
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{verbatim} %Für Blockkommentare
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[]{acronym}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{trfsigns} % Laplace, Fourier,...
+
+\usepackage{listings}
+\lstloadlanguages{Matlab} 
+\usepackage{zed-csp} %Matheumgebung für Zeichen wie \in \num (Z),...
+
+\usepackage{hyperref} %Für URLS
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\leftmark}
+\rhead{}
+\rfoot{Seite \thepage}
+\lfoot{Autor: Alle}
+
+\renewcommand{\subsectionmark}[1]{}
+
+\usepackage{pdfpages} %Geht nur mit PDF-Latex!!!
+\usepackage{lineno}
+
+
+\usepackage{multirow}
+\usepackage{lscape}
+
+\usepackage{pst-all}\psset{unit=.9cm}
+\usepackage{pst-pdf,pstricks-add}\psset{unit=.9cm}
+%\addtolength{\textwidth}{3.8cm}
+%\addtolength{\evensidemargin}{-1.9cm}
+%\addtolength{\oddsidemargin}{-1.9cm}
+
+
+%\usepackage{geometry,blindtext}
+%\geometry{a4paper,left=30mm,right=20mm, top=1cm, bottom=2cm, includeheadfoot}
+
+\usepackage{graphicx}
+
+%\pagestyle{headings}
+\usepackage{float} % für Positionierungsoption [H] beie Tables, figures,...
+
+
+\begin{document}
+
+\newpage 
+\input{Alle/Titelblatt}
+
+\newpage
+\input{Alle/Eidesstatt}
+
+\newpage
+\input{Alle/Danksagung}
+
+\newpage
+\tableofcontents
+
+\newpage 
+\input{Alle/Abstract}
+
+\newpage 
+\input{Alle/Aufgabenstellung}
+
+\newpage 
+\input{Alle/Documentation}
+
+\newpage 
+\input{Alle/Dokumentation}
+
+\newpage
+\input{Alle/Einleitung}
+
+\input{Alle/Schlaf}
+
+%DIPLOMARBEIT
+\newpage
+\input{Fuchs/EOG}
+
+\newpage
+\input{Gartner/frontend}
+
+\newpage
+\input{Hossain/sumsum}
+
+\newpage
+\input{Banata/Datenbank}
+
+\newpage
+\input{Alle/Anhang}
+
+\pagebreak \addcontentsline{toc}{section}{Literatur} 
+\include{Alle/litverz}
+
+\end{document}
