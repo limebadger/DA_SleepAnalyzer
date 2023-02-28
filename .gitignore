@@ -1,6 +1,4 @@
 DA_SleepAnalyzer.aux
-DA_SleepAnalyzer.log
-DA_SleepAnalyzer.pdf
 
 *.aux 
 *.bit 
@@ -20,5 +18,4 @@ DA_SleepAnalyzer.pdf
 *.url 
 *.svn 
 *.toc 
-*.pdf
 *.tps
