@@ -1,0 +1,50 @@
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/flussdiagramm.pdf}
+	\caption{Flussdiagramm der Mobile Application}
+	\label{fig:MA_Flussdiagramm}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.45\textwidth]{Gartner/buffer.jpg}
+	\caption{Loginfenster des GUI}
+	\label{fig:MA_Loginfenster}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.45\textwidth]{Gartner/buffer.jpg}
+	\caption{Registrierfenster des GUI}
+	\label{fig:MA_Registrierfenster}
+\end{figure}
+
+Der erste Bildschirm ist wie in Abbildung \ref{fig:MA_Flussdiagramm} zu erkennen entweder das Loginfenster oder der Homescreen mit der Datenansicht. Falls man die App zum ersten Mal öffnet oder sich in der letzten Session abgemeldet hat, ist das in Abbildung \ref{fig:MA_Loginfenster} zu sehende Loginfenster der Startpunkt. Von hier aus kann sich der Benutzer entweder einloggen, wenn er schon einen Account hat, oder zum Registrierfenster, wie in Abbildung \ref{MA_Registrierfenster} gezeigt, wechseln, um sich zu registrieren. Wenn die Registrierung erfolgreich war, wird wieder zum Loginfenster geleitet. Es gibt aber auch die Möglichkeit, ohne Registrierung wieder zum Loginfenster zu wechseln. In beiden Fällen muss der Login im Loginfenster erfolgen, um die Datenansicht zu laden. \\
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.45\textwidth]{Gartner/buffer.jpg}
+	\caption{Datenansicht des GUI}
+	\label{fig:MA_Datenansicht}
+\end{figure}
+
+Im Fall, dass der User sich bereits einmal eingeloggt und in der letzten Session nicht abgemeldet hat, wird direkt die Datenansicht geladen. Hier gibt es, wie in Abbildung \ref{MA_Datenansicht} zu sehen, eine Navigationsleiste am unteren Ende des Bildschirms, mit dem ausgewählt werden kann, ob die Daten- oder Weckeransicht gezeigt wird. \\
+In der Datenansicht werden alle Messergebnisse der EOG-Messungen eines Benutzers angezeigt. Hier gibt es, abgesehen vom Scrollfeature, keine Interaktionsmöglichkeiten. \\
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.45\textwidth]{Gartner/buffer.jpg}
+	\caption{Weckeransicht des GUI}
+	\label{fig:MA_Weckeransicht}
+\end{figure}
+
+Die Weckeransicht, gezeigt in Abbildung \ref{fig:MA_Weckeransicht}, ermöglicht eine Verwaltung der Weckerfunktion. Mögliche Interaktionen hier sind das Hinzufügen oder Entfernen und das Ein- oder Ausschalten eines Weckers. Hinzugefügte Wecker werden ebenfalls hier angezeigt. \\
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.45\textwidth]{Gartner/buffer.jpg}
+	\caption{Logout des GUI}
+	\label{fig:MA_Logout}
+\end{figure}
+
+Wie bereits in Abbildung \ref{MA_Datenansicht} und \ref{MA_Weckeransicht} zu erkennen, ist links oben in der Ansicht ein Menu Button implementiert. Das dahinterliegende Menu mit der Logout-Funktion ist in Abbildung \ref{MA_Logout} zu sehen. 

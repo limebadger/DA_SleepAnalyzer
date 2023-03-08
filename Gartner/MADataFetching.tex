@@ -1,0 +1,11 @@
+Da bei der Messung des EOGs die Daten direkt vom Mikrocontroller zu einem Server geschickt werden und dort auf einer Datenbank gespeichert werden, müssen diese zur Ansicht der Daten in der App diese zuerst vom Server angefragt werden. Wenn in der App zur Datenansicht gewechselt wird, entweder vom Loginfenster oder von der Weckeransicht, wird von einem Widget eine Funktion aufgerufen, in der ein Post-Request an den Server gestellt wird. Der body dieses Requests enthält die momentan gültige User-ID. Am Server werden alle Daten, die zu dieser ID vorhanden sind gesammelt und ebenfalls in einem Post-Request im JSON-Format zurückgesendet. Diese Daten werden dann in der App weiter verwertet. Im Folgenden werden alle einzelnen Schritte näher erläutert. 
+
+\paragraph{Async functions} \label{}
+
+\paragraph {Clientside} \label{MADataFetching_Clientside}
+
+Async functions, json, post vs. get request
+
+\paragraph {Hostside} \label{MADataFetching_Hostside}
+
+bisschen zu php seite

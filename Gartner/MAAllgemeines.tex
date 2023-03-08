@@ -1,0 +1,11 @@
+Wie bereits in Kapitel \ref{MAEinleitung} erwähnt, sind die meistverbreiteten Betriebssysteme, die die Umgebung für Mobile Apps darstellen, iOS und Android mit einem Marktanteil von 99\% im Jahr 2018 in den USA. Mobile Apps für diese beiden Betriebssysteme werden jedoch nicht in der selben Sprache geschrieben. Für Android kann in Java oder Kotlin geschrieben werden, während für iOS Objective-C oder Swift verwendet wird. Das ist in der Praxis oft nicht optimal, da eine Anwendung erstens in zwei verschiedenen Sprachen geschrieben werden muss und zweitens auch zwei verschiedene Anwendungen gewartet werden müssen\cite{reg403}. Eine Lösung für dieses Problem sind Hybrid Mobile App Development Frameworks. Mit diesen Frameworks können Apps in einer Sprache geschrieben werden und trotzdem auf verschiedenen Betriebssystemen laufen\cite{reg404}.\\
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/cross_platform_use_statistic.png}
+	\caption{Plattformübergreifende Mobile-Frameworks die von Softwareentwicklern weltweit verwendet werden (2019 bis 2021)\cite{reg405}}
+	\label{fig:cross_platform_use_statistic}
+\end{figure}
+
+Wie in Abbildung \ref{fig:cross_platform_use_statistic} zu sehen ist, sind die zwei meist verwendeten plattformübergreifenden Mobile-Frameworks seit 2019 Flutter und React Native, was sich immer weiter absetzt. Während im Jahr 2019 das meistverwendete Framwork noch React Native war, verwenden 2021 die meisten Entwickler bereits Flutter.  \\
+React Native und Flutter unterscheiden sich in mehreren Hinsichten. Zum einen wird das React Native-Framework mit JavaScript verwendet, während ein Flutter-Projekt in Dart geschrieben wird. React Native erreicht die plattformunabhängige Anwendung durch eine Brücke; ein React Native-Projekt in JavaScript auf einem Android-Gerät z.B. kommuniziert über diese Brücke mit nativen Komponenten des Betriebssystems. Bei Flutter hingegen wird ein Projekt beim Kompilieren von Dart direkt zu einer nativen Sprache übersetzt, für ein Gerät ist das also nicht zu unterscheiden von einer nativen App\cite{reg406}.

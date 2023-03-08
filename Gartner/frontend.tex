@@ -6,49 +6,45 @@
 
 Eine Mobile Application, oft nur App genannt, ist Software, die auf mobilen Geräten verwendet werden kann. Solche Geräte sind z.B. Smartphones, Tablets oder Smartwatches und haben meistens entweder Android oder iOS als Betriebssystem\cite{reg401}. Generell gibt es viele Anwendungen für mobile App wie Kommunikation, E-Commerce und Weiterbildung\cite{reg402}. In unserem Fall hat das Software Interface primär die Aufgabe, die mithilfe des EOGs gesammelten Daten für den User graphisch darzustellen. Sekundär gibt es eine Weckerfunktion.
 
-\subsection {Allgemeines zur Mobilapp-Entwicklung} \label {MA Allgemeines}
+\subsection {Allgemeines zur Mobilapp-Entwicklung} \label {MAAllgemeines}
 
-Wie bereits in Kapitel \ref{MAEinleitung} erwähnt, sind die meistverbreiteten Betriebssysteme, die die Umgebung für Mobile Apps darstellen, iOS und Android mit einem Marktanteil von 99\% im Jahr 2018 in den USA. Mobile Apps für diese beiden Betriebssysteme werden jedoch nicht in der selben Sprache geschrieben. Für Android kann in Java oder Kotlin geschrieben werden, während für iOS Objective-C oder Swift verwendet wird. Das ist in der Praxis oft nicht optimal, da eine Anwendung erstens in zwei verschiedenen Sprachen geschrieben werden muss und zweitens auch zwei verschiedene Anwendungen gewartet werden müssen\cite{reg403}. Eine Lösung für dieses Problem sind Hybrid Mobile App Development Frameworks. Mit diesen Frameworks können Apps in einer Sprache geschrieben werden und trotzdem auf verschiedenen Betriebssystemen laufen\cite{reg404}.\\
+\input{Gartner/MAAllgemeines}
 
-\begin{figure}[H]
-	\centering
-		\includegraphics[width=0.9\textwidth]{Gartner/cross_platform_use_statistic.png}
-	\caption{Plattformübergreifende Mobile-Frameworks die von Softwareentwicklern weltweit verwendet werden (2019 bis 2021)\cite{reg405}}
-	\label{fig:cross_platform_use_statistic}
-\end{figure}
-
-Wie in Abbildung \ref{fig:cross_platform_use_statistic} zu sehen ist, sind die zwei meist verwendeten plattformübergreifenden Mobile-Frameworks seit 2019 Flutter und React Native, was sich immer weiter absetzt. Während im Jahr 2019 das meistverwendete Framwork noch React Native war, verwenden 2021 die meisten Entwickler bereits Flutter.  \\
-React Native und Flutter unterscheiden sich in mehreren Hinsichten. Zum einen wird das React Native-Framework mit JavaScript verwendet, während ein Flutter-Projekt in Dart geschrieben wird. React Native erreicht die plattformunabhängige Anwendung durch eine Brücke; ein React Native-Projekt in JavaScript auf einem Android-Gerät z.B. kommuniziert über diese Brücke mit nativen Komponenten des Betriebssystems. Bei Flutter hingegen wird ein Projekt beim Kompilieren von Dart direkt zu einer nativen Sprache übersetzt, für ein Gerät ist das also nicht zu unterscheiden von einer nativen App\cite{reg406}.
-
-\subsubsection {Entwicklungsumgebung} \label{}
+\subsubsection {Entwicklungsumgebung} \label{MAEntwicklungsemgebung}
 
 VSCode, Android Studio Emulator
 
-\subsection {Flussdiagramm} \label {}
+\subsection {Flussdiagramm} \label {MAFlussdiagramm}
+
+\input{Gartner/MAFlussdiagramm}
 
 \subsection {Funktionalität} \label {}
 
-\subsubsection {Framework} \label {} 
+\subsubsection {Framework} \label {MAFramework} 
 
-Flutter, auch in Bezug auf plattformunabhängigkeit, Objekte, Widgets
+Wie bereits in Kapitel \ref{MAEinleitung}
 
-\subsubsection {State-Management} \label{}
+\subsubsection {Benutzerverwaltung} \label {}
 
-State, Provider
+\subsubsection {State-Management} \label{MAState}
 
-\subsubsection {Data-Fetching} \label{}
+\input{Gartner/MAState}
 
-\paragraph {Clientside} \label{}
+\subsubsection {Permanenter Speicher} \label{}
 
-Async functions, json, post vs. get request
+\subsubsection {Data Fetching} \label{MADataFetching}
 
-\paragraph {Hostside} \label{}
+\input{Gartner/MADataFetching}
 
-bisschen zu php seite
+
 
 \subsubsection {Graphische Darstellung der Daten} \label{}
 
 syncfusion flutter charts
+
+\subsubsection {Design} \label{}
+
+Material Design
 
 
 
