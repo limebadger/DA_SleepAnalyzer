@@ -1,11 +1,24 @@
-Da bei der Messung des EOGs die Daten direkt vom Mikrocontroller zu einem Server geschickt werden und dort auf einer Datenbank gespeichert werden, müssen diese zur Ansicht der Daten in der App diese zuerst vom Server angefragt werden. Wenn in der App zur Datenansicht gewechselt wird, entweder vom Loginfenster oder von der Weckeransicht, wird von einem Widget eine Funktion aufgerufen, in der ein Post-Request an den Server gestellt wird. Der body dieses Requests enthält die momentan gültige User-ID. Am Server werden alle Daten, die zu dieser ID vorhanden sind gesammelt und ebenfalls in einem Post-Request im JSON-Format zurückgesendet. Diese Daten werden dann in der App weiter verwertet. Im Folgenden werden alle einzelnen Schritte näher erläutert. 
+Da bei der Messung des EOGs die Daten direkt vom Mikrocontroller zu einem Server geschickt werden und dort auf einer Datenbank gespeichert werden, müssen diese zur Ansicht der Daten in der App zuerst vom Server angefragt werden. Wenn in der App zur Datenansicht gewechselt wird, entweder vom Loginfenster oder von der Weckeransicht, wird von einem Widget eine Funktion aufgerufen, in der ein Post-Request an den Server gestellt wird. Der body dieses Requests enthält die momentan gültige User-ID. Am Server werden alle Daten, die zu dieser ID vorhanden sind gesammelt und ebenfalls in einem Post-Request im JSON-Format zurückgesendet. Diese Daten werden dann in der App weiter verwertet. Im Folgenden werden alle einzelnen Schritte näher erläutert. 
 
-\paragraph{Async functions} \label{}
+\paragraph{Async functions} \label{MADataFetching_AsyncFunctions}
 
-\paragraph {Clientside} \label{MADataFetching_Clientside}
+Da Vorgänge wie das Warten auf eine Antwort des Servers nach dem Senden eines POST-Requests lange dauern, wäre es nicht gut, wenn alle anderen Vorgänge währenddessen blockiert sind. Deshalb gibt es Unterscheidungen zwischen synchronen und asynchronen Vorgängen. Bei synchronen Operationen wird ein Schritt nach dem anderen abgehandelt, während bei asynchronen Operationen währenddessen andere Operationen durchgeführt werden können. Die Klasse, die für asynchrone Vorgänge im Flutter-Framework verwendet wird ist die Future\flq T\frq{} Klasse. Ein \glqq future\grqq{} ist eine Instanz der Klasse Future und ist das Ergebniss einer asynchronen Funktion. Wenn nun eine asynchrone Funktion aufgerufen wird, wird ein unvollständeiges future zurückgegeben. Dieses future wartet auf den wirklichen Wert, der von der Funktion zurückgegeben wird (falls eine Funktion einen Rückgabewert hat). \\
+Dies sorgt dafür, dass während auf die Antwort des Servers gewartet werden muss, alle anderen Vorgänge in der App weiter bestehen bleiben.
 
-Async functions, json, post vs. get request
+\paragraph{HTTP Requests} \label{}
 
-\paragraph {Hostside} \label{MADataFetching_Hostside}
+Es gibt eine Reihe von Requests, die im HTTP-Protokoll angeführt sind und oft in zur Datenvermittelung verwendet werden. Zwei der häufigsten davon sind der POST- und der GET-Request. Diese beiden unterscheiden sich in mehreren Hinsichten. Wie der Name es annehmen lässt ist ein GET-Request ursprünglich für die Anfrage an einen Server nach Daten und ein POST-Request für das Vermitteln von Daten an den Server gedacht. Dies muss in der Praxis allerdings nicht immer eingehalten werden\cite{reg413}. \\
+Einer der wichtigsten Unterschiede ist, dass bei einem GET-Request die gesamte Anfrage im Header eines Requests angeführt ist, und somit die Länge auch an die maximale URL-Länge eines Browsers angepasst werden muss; Ein GET-Request kann also für Internet Explorer zum Beispiel maximal 2.048 Zeichen, abzüglich der Anzahl der Zeichen des Pfads, betragen. \\
+Bei einem POST-Request ist das nicht der Fall, da der Inhalt eines POST-Requests nicht im header, sondern im Message-body angeführt wird\cite{reg413},\cite{reg414}. \\
 
-bisschen zu php seite
+\paragraph {Implementierung} \label{MADataFetching_Implementierung}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/async_post_json.png}
+	\caption{Quellcodeausschnitt zur Kommunikation mit dem Server}
+	\label{fig:async_post_json}
+\end{figure}
+
+In Abbildung \ref{fig:async_post_json} ist die Funktion zur Anfrage und Erhaltung der Daten vom Server zu sehen. Zuerst wird ein POST-Request geschickt, in dessen body die Benutzer-ID festgelegt ist. Die Antwort des Servers erfolgt im JSON-Format und muss dekodiert werden. 
+

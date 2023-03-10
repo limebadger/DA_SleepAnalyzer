@@ -1,0 +1,63 @@
+
+Die Benutzerverwaltung ist im Projekt vor allem wichtig, um für jeden Benutzer die passenden Datensätze anzeigen zu können. Beim Öffnen der App ist der Start immer beim Loginfenster, wo geprüft wird, ob der Benutzer bereits eingeloggt ist oder nicht. Zu diesem Zweck wird die User-ID aufgerufen und überprüft, ob sie größer als 0 ist. Falls das der Fall ist, wird der Benutzer direkt zum Homescreen weitergeleitet. Falls die User-ID 0 ist, was in der Software als nicht eingeloggt definiert wurde, wird das Loginfenster angezeigt. Wie in Abbildung \ref{fig:MA_Loginfenster} gezeigt, gibt es zwei Textfelder, eines um den Benutzernamen und eines um das Passwort einzugeben. Es gibt eine Reihe von Fehlern, die beim Einloggen auftreten können: 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.4\textwidth]{Gartner/assets/ss_benutzerverwaltung_serverConnectionError.png}
+	\caption{Fehlermeldung: \glqq Server Connection Error\grqq}
+	\label{fig:ss_benutzerverwaltung_serverConnectionError}
+\end{figure}
+
+Die Abbildung \ref{fig:ss_benutzerverwaltung_serverConnectionError} zeigt die Fehlermeldung bei Verbindungsproblemen zum Server. Eine Ursache für dieses Problem kann sein, dass entweder der Benutzer oder der Server keine Internetverbindung hat. Diese Fehlermeldung ist in der lokalen Software verankert, es gab also keinen Kontakt zum Server. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.4\textwidth]{Gartner/assets/ss_benutzerverwaltung_fillInBothParameters.png}
+	\caption{Fehlermeldung: \glqq Fill in both Parameters\grqq}
+	\label{fig:ss_benutzerverwaltung_fillInBothParameters}
+\end{figure}
+
+Abbildung \ref{fig:ss_benutzerverwaltung_fillInBothParameters} zeigt die Fehlermeldung bei Nichtausfüllen einer oder zwei Textfelder. Diese Fehlermeldung wird von dem Server übergeben, kann also bei fehlender Internetverbindung gar nicht entstehen. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.4\textwidth]{Gartner/assets/ss_benutzerverwaltung_incorrectUsername.png}
+	\caption{Fehlermeldung: \glqq Incorrect Username\grqq}
+	\label{fig:ss_benutzerverwaltung_incorrectUsername}
+\end{figure}
+
+In Abbildung \ref{fig:ss_benutzerverwaltung_incorrectUsername} ist die Fehlermeldung bei Angabe eines ungültigen Usernames zu sehen. Diese Fehlermeldung wird ebenfalls vom Server übergeben. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.4\textwidth]{Gartner/assets/ss_benutzerverwaltung_incorrectPassword.png}
+	\caption{Fehlermeldung: \glqq Incorrect Password\grqq}
+	\label{fig:ss_benutzerverwaltung_incorrectPassword}
+\end{figure}
+
+Abbildung \ref{fig:ss_benutzerverwaltung_incorrectPassword} zeigt die Fehlermeldung bei Angabe eines ungültigen Passworts. Wie die zwei eben genannten Fehlermeldungen stammt auch diese vom Server.\\
+
+Falls die Anmeldung allerdings erfolgreich ist, also Verbindung zwischen Server und Client besteht und der Benutzer einen gültigen Benutzernamen und Passwort eingibt, wird er zum Homescreen weitergeleitet während im Hintergrund der Server die User-ID zurückgibt, welche dann gespeichert wird. Für das Auslesen und Speichern dieser Daten gibt es zwei Prinzipien, die wichtig sind: Wie Daten permanent gespeichert werden, und wie die Daten dann über den Widget-Baum hinweg aufgerufen werden können.
+
+\subsubsection {Permanenter Speicher} \label{}
+
+In einem Projekt werden Variablen allerdings nicht prinzipiell permanent gespeichert, sondern gelöscht, wenn die Anwendung geschlossen wird. Das ist bei der Benutzerverwaltung ein Problem, wenn der Benutzer eingeloggt bleiben soll. Wenn Daten also auf einem Gerät selbst, und nicht auf z.B. einem seperaten Server gespeichert werden sollen, muss dafür ein Plug-in installiert werden. Eine Möglichkeit hierfür wäre SQLite, eine kompakte SQL-Datenbank-engine. SQLite wird von vielen Entwicklern verwendet, auch außerhalb des Flutter-Frameworks\cite{reg415}. \\
+Während SQLite gut für größere Projekte oder Projekte, die auf ein komplexeres Speichersystem hingewiesen sind geeignet ist, gibt es auch einfacher zu implementeriende Lösungen. Eine davon ist das Package \glqq get\_storage\grqq{}, das in diesem Projekt verwendet wurde. Die Entscheidung wurde aufgrund der einfacheren Implementierung, aber auch wegen der Geschwindigkeit der Klasse getroffen. Tatsächlich ist GetStorage so schnell, dass der Zugriff und die Speicherung in der Klasse als synchrone Abläufe stattfinden (mehr dazu in Kapitel \ref{MADataFetching_AsyncFunctions})\cite{reg416}. \\
+In der Software wird GetStorage für die Benutzerverwaltung und die Weckerfunktion benötigt.
+
+\subsubsection {State Management} \label{}
+
+Es gibt zwei verschiedene Arten von Widgets in Flutter: Stateless und Stateful Widgets. Stateful Widgets sind Widgets, die sich verändern können, wenn z.B. Daten dargestellt werden oder der Benutzer mit dem Widget interagieren kann. Stateless Widgets hingegen sind Widgets, die sich nie verändern\cite{reg407}.\\
+State ist Information, die ermittelt werden kann, während ein Widget gebaut wird und sich auch ändern kann. Beim Entwickeln einer App in Flutter muss also darauf geachtet werden, dass beim Auftreten solcher Änderungen ein Widget auch neu aufgebaut wird, da die dahinterliegenden Informationen sich sonst geändert haben, aber nicht das Widget selbst. Das kann mit Methoden wie z.B. setState geregelt werden\cite{reg408}. Hier können aber Probleme entstehen, wenn State über verschiedene Klassen hinweg weitergegeben werden muss; Dies kann zwar mit Übergabeparametern gelöst werden, aber auch hier bleibt das genannte Problem bestehen und vor allem bei größeren Projekten ist die Lösung bei weitem nicht ideal.\\
+Im Internet können viele Klassen gefunden werden, die State Management vereinfachen sollen. Eine der Basisklassen ist die InheritedWidget class. Die Logik hinter der Klasse ist, dass State im Baum nach unten vererbt werden kann, sich die verknüpften Widgets sich bei einer Änderung des States in einem darüberliegenden Widget also auch neu aufbauen\cite{reg409}. 
+Für das Projekt Sleepanalyzer wurde die Klasse provider zusammen mit ChangeNotifier verwendet, was einer der populärsten Ansätze ist. Klassen können als ChangeNotifier Klasse angelegt werden. Andere Klassen können dann subscriben, um bei Änderungen verständigt zu werden. Die Klasse Provider sorgt dafür, dass State nicht durch den ganzen Widgetbaum weitergegeben werden muss, sondern direkt zu einem bestimmten Widget weitergegeben werde kann. Dazu muss allerdings eine Liste in einem Widget über einem Provider und dem Widget, in dem der State gebraucht wird angelegt sein\cite{410}.
+
+\subsubsection {Implementierung} \label{}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/code_benutzerverwaltung_1.png}
+	\caption{Quellcodeausschnitt zur Benutzerverwaltung}
+	\label{fig:code_benutzerverwaltung_1}
+\end{figure}
+

@@ -1,0 +1,62 @@
+Wie bereits in Kapitel \ref{MAAllgemeines} erwähnt, wurde für dieses Projekt Flutter als Framework gewählt. Das hat mehrere Gründe, doch zunächst etwas zur Geschichte von Flutter.\\
+Flutter wurde 2016 von Google auf den Markt gebracht. Im Gegensatz zu React Native, das auf einem bereits vorher bestandenen Framework aufgebaut wurde und ein Jahr früher auf den Markt gekommen ist, hat Google Flutter neu aufgebaut. Hierbei haben die Entwickler - im Gegensatz zu React Native, das in JavaScript geschrieben wird - Dart als Sprache gewählt. Das war allerdings nicht von Anfang an klar, da vor allem zu Beginn JavaScript eigentlich die erste Wahl gewesen wäre\cite{reg406}.\\
+
+\paragraph {Dart} \label{MAFramework_Dart}
+
+Dart wurde ursprünglich von Google für Webdevelopment entwickelt und war als Alternative zu JavaScript angedacht. Da teilweise JavaScript-Standards eingehalten worden sind, gibt es ähnliche Befehle in den beiden Sprachen wie zum Beispiel \glqq async \grqq{}oder \glqq await \grqq. Trotzdem ist die Syntax eher Java-ähnlich aufgebaut\cite{reg417}.\\
+Einer der Vorteile von Dart ist, dass die Sprache AOT (ahead of time) und JIT (Just in Time) kompiliert werden kann. Code, der JIT kompiliert wird, ist oft viel langsamer, dafür ist AOT kompilierter Code nicht plattformunabhängig. Code, der JIT kompiliert wird, läuft in der Dart-VM. Mithilfe davon können Programme nur teilweise neu kompiliert werden, ohne dass das gesamte Programm neu kompiliert wird. Das ermöglicht eine viel schnellere und angenehmere Entwicklung, da Änderungen im Programm sehr schnell übertragen und ausgetestet werden können. Außerdem ermöglicht es einige Debug-Funktionen. Für die praktische Anwendung eines Projekts, nach der Entwicklungsphase, kann Dart dann in nativen Code umgewandelt werden\cite{reg417}.\\
+Ein weiterer Vorteil, den Dart gegenüber JavaScript hat, ist ein generational garbage collector.\\
+Während Zuteilung und auch das Freigeben von Speicher in Sprachen wie C manuell geregelt werden muss, gibt es dafür in höheren Sprachen automatisierte Prozesse, wie zum Beispiel den Garbage Collector (GC). Die Aufgabe eines GCs ist es, unbenutzten Speicher wieder freizugeben. Zu diesem Zweck wird überprüft, welche Objekte nicht mehr referenziert werden und diese dann gelöscht, wie in Abbildung \ref{fig:gr_MAFramework_GC1} zu sehen ist:
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/gr_MAFramework_GC1.jpg}
+	\caption{Markieren unreferenzierter Objekte\cite{reg419}}
+	\label{fig:gr_MAFramework_GC1}
+\end{figure}
+
+Es dauert jedoch relativ lang, eine gesamte Anwendung nach referenzierten und nicht-referenzierten Objekten zu durchsuchen. Ein Ansatz, um diesen Prozess schneller zu machen, ist der generational GC. Diese Art von GC baut darauf auf, dass die meisten Objekte sehr nah an ihrere Erstellung wieder collected werden können, und Objekte, die schon einige Zeit lang bestehen, oft noch länger bestehen als neue. Die Überlegung ist also, dass ältere Objekte nicht mehr so oft auf ihre Referenzierung überprüft werden müssen. In Abbildung \ref{fig:gr_MAFramework_GC2} ist ein möglicher Aufbau eines generational GCs gezeigt:
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/gr_MAFramework_GC2.jpg}
+	\caption{verschiedene Generationen des GC\cite{reg419}}
+	\label{fig:gr_MAFramework_GC2}
+\end{figure}
+
+Neue Objekte kommen hier nach Eden. Bei jedem kleineren GC-Event wird Eden und beide survivor spaces auf aussortierbare Objekte durchsucht. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/gr_MAFramework_GC3.jpg}
+	\caption{Zuteilung der Objekte zu survivor spaces\cite{reg419}}
+	\label{fig:gr_MAFramework_GC3}
+\end{figure}
+
+Wie in Abbildung \ref{fig:gr_MAFramework_GC3} zu sehen ist, werden referenzierte Objekte in einen der survivor spaces umgelagert und unreferenzierte Objekte als neuer Speicherplatz freigegeben. Bei jedem GC-Event werden auch noch referenzierte Objekte aus einem survivor space in den jeweils anderen geschoben. Wenn diese nun ein gewisses \glqq Alter \grqq{}erreicht haben, werden sie als ältere Generation festgelegt, und nicht mehr bei jedem GC-Event sondern nur noch gelegentlich überprüft, wie in Abbildung \ref{fig:gr_MAFramework_GC4} gezeigt\cite{reg419}: 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/gr_MAFramework_GC4.jpg}
+	\caption{Zuteilung der Objekte zu einer älteren Generation\cite{reg419}}
+	\label{fig:gr_MAFramework_GC4}
+\end{figure}
+
+Ein weiterer Vorteil des Dart-GC ist, dass GC-Events durchgeführt werden, wenn eine App gerade untätig ist; das sorgt dafür, dass die Performance nicht durch das Event gestört wird\cite{reg421}.
+Da in Flutter potenziell sehr viele Objekte und Widgets erstellt werden, die nach einer kurzen Zeit nicht mehr referenziert werden, ist der GC ein wichtiger Bestandteil.\\
+Ein weiterer Vorteil Dart gegenüber JavaScript ist, dass Dart type-safe ist. Das bedeutet, wenn zum Beispiel eine Variable als Integer definiert wird, diese Variable aber ein String als Wert zugewiesen wird, dann resultiert das in einem compile-time-error (Der Code wird nicht kompiliert). Das hat mehrere Vorteile: Erstens werden somit mit dem Typ verbundene Fehler während des Kompilierens erkannt. Vor allem bei großen Projekten kann es sonst schwierig werden, einen solchen Fehler im Nachhinein zu identifizieren. Weiters ist der Code mit Type-safety einfacher zu lesen und zu erhalten. Ein weiterer Vorteil ist, dass Code mit Type-safety besser AOT-kompiliert werden kann; Kompilieren von nicht type-safe Code ist zwar möglich, dieser kompilierte Code ist aber weniger effizient\cite{reg422}. \\
+Ein weiterer Vorteil Dart gegenüber JavaScript ist, dass Dart type-safe ist. Das bedeutet, wenn zum Beispiel eine Variable als Integer definiert wird, diese Variable aber ein String als Wert zugewiesen wird, dann resultiert das in einem compile-time-error (Der Code wird nicht kompiliert). Das hat mehrere Vorteile: Erstens werden somit mit dem Typ verbundene Fehler während des Kompilierens erkannt. Vor allem bei großen Projekten kann es sonst schwierig werden, einen solchen Fehler im Nachhinein zu identifizieren. Weiters ist der Code mit Type-safety einfacher zu lesen und zu erhalten. Ein weiterer Vorteil ist, dass Code mit Type-safety besser AOT-kompiliert werden kann; Kompilieren von nicht type-safe Code ist zwar möglich, dieser kompilierte Code ist aber weniger effizient\cite{reg422}. \\
+Ein weiterer Vorteil Darts gegenüber JavaScript ist, dass es einfach schneller ist. Außerdem war es auch eine praktische Entscheidung, da das Flutter- und das Dart-Entwicklerteam gut zusammenarbeiten konnten, da beide von Google stammen\cite{reg406}.\\
+
+\paragraph {Flutter Architektur} \label{MAFramework_flutterArchitektur}
+
+Die Architektur Flutters ist wie in Abbildung \ref{fig:gr_MAFramework_archdiagram} dargestellt aufgebaut:
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.9\textwidth]{Gartner/assets/gr_MAFramework_archdiagram.jpg}
+	\caption{Diagramm der Architektur Flutters\cite{reg423}}
+	\label{fig:gr_MAFramework_archdiagram}
+\end{figure}
+
+Das System ist aus verschiedenen Lagen aufgebaut. Eine Lage ist immer von weiter unten liegenden Lagen abhängig. Die unterste Lage ist der Embedder. Der Embedder ist die Schnittstelle zwischen dem Betriebssystem und der App. Das ist vor allem wichtig, um Zugang zu Instanzen wie Bildschirm oder Eingabe zu haben. Je nach Betriebssystem ist der Embedder in einer passenden Sprache geschrieben: Java oder C\raisebox{-0.5ex}{++} für Android, 
